@@ -26,3 +26,4 @@ Route::get('/create',[UserController::class,'createTransaction']);
 Route::post('/create',[UserController::class,'store']);
 
 Route::get('/tb',[UserController::class,'tb']);
+Route::get('/comments',[UserController::class,'comments']);

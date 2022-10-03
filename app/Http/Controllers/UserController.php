@@ -99,4 +99,15 @@ class UserController extends Controller
         return  view('welcome');
     }
 
+
+
+    public function comments()
+    {
+        //$comments=DB::table('comments')->get();
+
+        $comments=DB::table('users')->join('comments','comments.user_id','users.id')->select('users.name','comments.*')->get();
+        //dd($comments);
+        return view('user.comment',compact('comments'));
+    }
+
 }
