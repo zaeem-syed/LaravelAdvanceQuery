@@ -105,9 +105,21 @@ class UserController extends Controller
     {
         //$comments=DB::table('comments')->get();
 
-        $comments=DB::table('users')->join('comments','comments.user_id','users.id')->select('users.name','comments.*')->get();
+        $comments=DB::table('users')->join('comments','comments.user_id','users.id')
+        ->select('users.name','comments.*',)
+        //->distinct()
+        
+        ->get();
+
+        $comments_2=DB::Table('comments')->select('user_id')->distinct()
+        ->get();
+        dd($comments_2);
+
         //dd($comments);
-        return view('user.comment',compact('comments'));
+        $total_comments=$comments->count('comments.context');
+        //dd($total_comments);
+        //dd($comments);
+        return view('user.comment',compact('comments','total_comments'));
     }
 
 }
