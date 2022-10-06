@@ -18,7 +18,8 @@ class CommentFactory extends Factory
         return [
             //
             'context' => $this->faker->text(10),
-            'user_id' => rand(1,3)
+            'user_id' => rand(1,3),
+            'rating' => rand(1,5),
         ];
     }
 }

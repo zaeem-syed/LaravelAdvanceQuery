@@ -58,10 +58,32 @@ class RoomController extends Controller
         //$result=DB::statement('ALTER Table comments ADD FULLTEXT fulltext_index (context)');
          //dump($result);
 
-         $result=DB::table('comments')->whereRaw("Match(context) AGAINST (? IN BOOLEAN MODE)",['+cute -cops'])->get();
-         dump($result);
+        //  $result=DB::table('comments')->whereRaw("Match(context) AGAINST (? IN BOOLEAN MODE)",['+cute -cops'])->get();
+        //  dump($result);
         // $result=DB::table('comments')->where('context','LIKE','%'.'cute'.'%')->get();
         // dump($result);
+
+        //$result=DB::table('comments')
+        //->select(DB::raw('count(user_id) as number_of_comments,users.name'))
+        //->selectRaw("count(user_id) as number_of_comments,users.name,users.email")
+        //->join('users','users.id','=','comments.user_id')
+        //->groupBy('user_id')
+        //->get();
+
+        // $result=DB::table('comments')->orderByRaw('updated_at - created_at DESC')
+        // ->get();
+        // $result=DB::table('users')->selectRaw("LENGTH (name) as user_name,name")
+        // ->orderByRaw('LENGTH(name) DESC')->get();
+        // dump($result);
+        // $result=DB::table('comments')->selectRaw('count(id) as number_of_5star,rating')
+        // ->groupBy('rating')
+        // //->select('comments.*')
+        // ->having('rating','=',2)
+        $result=DB::table('comments')->offset(1)
+        ->limit(5)
+
+        ->get();
+        dump($result);
          return view('room.index',compact('result'));
     }
 }
