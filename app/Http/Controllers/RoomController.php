@@ -79,10 +79,31 @@ class RoomController extends Controller
         // ->groupBy('rating')
         // //->select('comments.*')
         // ->having('rating','=',2)
-        $result=DB::table('comments')->offset(1)
-        ->limit(5)
+        // $result=DB::table('comments')->offset(1)
+        // ->limit(5)
 
-        ->get();
+        // ->get();
+
+        // $room_id=3;
+        // $result=DB::table('reservations')
+        // ->when($room_id,function($query,$room_id){
+        //     return $query->where('room_id',$room_id);
+        // })->get();
+
+        // $sort_by=NULL;
+        // $result=DB::table('rooms')->when($sort_by,function($query,$sort_by){
+        //     return $query->orderBy($sort_by);
+        // },function($query){
+        //     return $query->orderBy('price');
+        // })->get();
+
+        $result=DB::table('comments')->orderBy('id')->chunk(2,function($comments){
+            foreach($comments as $comment){
+                if($comment->id==5){
+                    return false;
+                }
+            }
+        });
         dump($result);
          return view('room.index',compact('result'));
     }

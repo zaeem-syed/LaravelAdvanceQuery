@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CommentFactory extends Factory
+class CityFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,12 +13,9 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
-
         return [
             //
-            'context' => $this->faker->text(10),
-            'user_id' => rand(1,6),
-            'rating' => rand(1,5),
+            'name' => $this->faker->unique()->city,
         ];
     }
 }

@@ -35,3 +35,6 @@ Route::get('/room',[RoomController::class,'index']);
 Route::get('/reservations',[RoomController::class,'res']);
 
 Route::get('/users/resv',[RoomController::class,'users']);
+
+
+Route::get('/city',[RoomController::class,'city']);
