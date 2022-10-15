@@ -107,4 +107,31 @@ class RoomController extends Controller
         dump($result);
          return view('room.index',compact('result'));
     }
+
+
+    public function city()
+    {
+
+        // $result=DB::table('reservations')->join('rooms','rooms.id','=','reservations.room_id')
+        // ->join('users','users.id','=','reservations.user_id')
+        // ->join('cities','cities.id','=','reservations.city_id')
+        // ->where('rooms.id',1)
+        // ->where('users.id',2)
+        // ->select('users.name','users.email','reservations.check_in','reservations.check_out','rooms.room_number','rooms.price','cities.name as city_name')
+        // ->get();
+
+        $result=DB::table('reservations')->join('rooms',function($join){
+                  $join->on('reservations.room_id','=','rooms.id')
+                  ;
+        })->join('users',function($join){
+              $join->on('reservations.user_id','users.id')
+              ->where('users.id','>',3);
+        })->join('cities',function($join){
+            $join->on('reservations.city_id','=','cities.id')->selectRaw('cities.name as city_name');
+        })->get();
+
+
+        dump($result);
+        return view('room.index',compact('result'));
+    }
 }
